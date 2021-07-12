@@ -1,12 +1,7 @@
-<style>
-    #navigation-menu {
-        height: calc(100vh - 4rem);
-    }
-
-</style>
-<header class="bg-trueGray-700 sticky top-0">
+<header class="bg-trueGray-700 sticky top-0" x-data="dropdown()">
     <div class="container flex items-center h-16">
         <a
+            x-on:click="show()"
             class="flex flex-col items-center justify-center px-4 bg-white bg-opacity-25 text-white cursor-pointer font-semibold h-16">
             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,7 +46,7 @@
                             @csrf
 
                             <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
+                                                            this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-jet-dropdown-link>
                         </form>
@@ -84,26 +79,31 @@
         @livewire('dropdown-cart')
     </div>
 
-    <nav id="navigation-menu" class="bg-trueGray-700 bg-opacity-25 w-full absolute">
+    <nav id="navigation-menu" 
+        :class="{'block': open, 'hidden': !open}"
+        x-show="open"
+        class="bg-trueGray-700 bg-opacity-25 w-full absolute hidden">
         <div class="container h-full">
-            <div class="grid grid-cols-4 h-full relative">
+            <div 
+                x-on:click.away="close()"
+            class="grid grid-cols-4 h-full relative">
                 <ul class="bg-white ">
                     @foreach ($categories as $category)
-                        <li class="text-trueGray-500 hover:bg-orange-500 hover:text-white">
+                        <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
                             <a href="" class="py-2 px-4 text-sm flex items-center">
                                 <span class="flex justify-center w-9">
-                                    {!!$category->icon!!}
+                                    {!! $category->icon !!}
                                 </span>
-                                {{$category->name}}
+                                {{ $category->name }}
                             </a>
-                            <div class="bg-red-500 absolute w-3/4 h-full top-0 right-0">
-
+                            <div class="navigation-submenu bg-gray-100 absolute w-3/4 h-full top-0 right-0 hidden">
+                                <x-navigation-subcategories :category="$category"/>
                             </div>
                         </li>
                     @endforeach
                 </ul>
                 <div class="col-span-3 bg-gray-100">
-
+                    <x-navigation-subcategories :category="$categories->first()" />
                 </div>
             </div>
         </div>
