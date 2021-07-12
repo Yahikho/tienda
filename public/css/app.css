@@ -1120,6 +1120,9 @@ select {
 .z-50 {
 	z-index: 50;
 }
+.order-last {
+	order: 9999;
+}
 .col-span-6 {
 	grid-column: span 6 / span 6;
 }
@@ -1129,6 +1132,10 @@ select {
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
+}
+.my-2 {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 .ml-3 {
 	margin-left: 0.75rem;
@@ -1204,6 +1211,9 @@ select {
 }
 .-mt-px {
 	margin-top: -1px;
+}
+.mb-2 {
+	margin-bottom: 0.5rem;
 }
 .block {
 	display: block;
@@ -1571,6 +1581,9 @@ select {
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
 }
+.bg-opacity-100 {
+	--tw-bg-opacity: 1;
+}
 .object-cover {
 	-o-object-fit: cover;
 	   object-fit: cover;
@@ -1821,6 +1834,10 @@ select {
 .text-gray-300 {
 	--tw-text-opacity: 1;
 	color: rgba(209, 213, 219, var(--tw-text-opacity));
+}
+.text-orange-500 {
+	--tw-text-opacity: 1;
+	color: rgba(249, 115, 22, var(--tw-text-opacity));
 }
 .underline {
 	text-decoration: underline;
@@ -2309,6 +2326,10 @@ select {
 }
 @media (min-width: 768px) {
 
+	.md\:order-first {
+		order: -9999;
+	}
+
 	.md\:col-span-2 {
 		grid-column: span 2 / span 2;
 	}
@@ -2321,6 +2342,10 @@ select {
 		margin-top: 0px;
 	}
 
+	.md\:block {
+		display: block;
+	}
+
 	.md\:grid {
 		display: grid;
 	}
@@ -2331,6 +2356,10 @@ select {
 
 	.md\:grid-cols-2 {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.md\:justify-start {
+		justify-content: flex-start;
 	}
 
 	.md\:gap-6 {
