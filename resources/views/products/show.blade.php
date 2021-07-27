@@ -35,11 +35,11 @@
                 <div>
                     @if ($product->subcategory->size)
 
-                        @livewire('add-cart-size', ['product' => $product])
+                        @livewire('add-cart-item-size', ['product' => $product])
 
                     @elseif($product->subcategory->color)
 
-                        @livewire('add-cart-color', ['product' => $product])
+                        @livewire('add-cart-item-color', ['product' => $product])
 
                     @else
 
