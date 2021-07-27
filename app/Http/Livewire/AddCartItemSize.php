@@ -38,4 +38,11 @@ class AddCartItemSize extends Component
     {
         return view('livewire.add-cart-item-size');
     }
+    public function decrement(){
+        $this->qty = $this->qty - 1;
+    }
+
+    public function increment(){
+        $this->qty = $this->qty + 1;
+    }
 }
