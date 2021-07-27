@@ -29,7 +29,7 @@ class Product extends Model
     }
 
     public function colors(){
-        return $this->belongsToMany(Color::class);
+        return $this->belongsToMany(Color::class)->withPivot('quantity');
     }
 
     public function images(){
