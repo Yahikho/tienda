@@ -23,6 +23,7 @@
         </div>
         <div class="flex-1">
             <x-button class="w-full" color="orange"
+                x-bind:disabled="$wire.qty > $wire.quantity"
                 wire:click="addItem"
                 wire:loading.attr="disabled"
                 wire:target="addItem"
