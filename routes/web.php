@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\searchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Livewire\ShoppingCart;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +20,13 @@ use App\Http\Controllers\WelcomeController;
 
 Route::get('/', WelcomeController::class );
 
+Route::get('search', searchController::class)->name('search');
+
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
