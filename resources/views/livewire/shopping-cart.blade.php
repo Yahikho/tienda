@@ -96,9 +96,11 @@
                     </p>
                 </div>
                 <div>
-                    <x-button-enlace color="orange">
-                        CONTINUAR
-                    </x-button-enlace>
+                    <a href="{{ route('orders.create')}}">
+                        <x-button-enlace color="orange">
+                            CONTINUAR
+                        </x-button-enlace>
+                    </a>                   
                 </div>
             </div>
         </div>
