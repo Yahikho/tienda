@@ -3,18 +3,20 @@
         <div class="bg-white rounded-lg shadow-lg p-6">
             <div class="mb-4">
                 <x-jet-label value="Nombre de contacto" />
-                <x-jet-input type="text" placeholder="Ingrese nombre persona que recibirá producto" class="w-full" />
+                <x-jet-input type="text" wire:model.defer="contact" placeholder="Ingrese nombre persona que recibirá producto" class="w-full" />
+                <x-jet-input-error for="contact" />
             </div>
             <div>
                 <x-jet-label value="Telefono de contacto" />
-                <x-jet-input type="text" placeholder="Ingrese un número de telefono de contacto" class="w-full" />
+                <x-jet-input type="text" wire:model.defer="phone" placeholder="Ingrese un número de telefono de contacto" class="w-full" />
+                <x-jet-input-error for="phone" />
             </div>
         </div>
-        <div>
+        <div x-data="{ envio_type:  @entangle('envio_type') }">
             <p class="mt-6 mb-3 text-lg text-gray-700 font-semibold">Envíos</p>
 
             <label class="bg-white rounded-lg shadow-lg px-6 py-4 flex items-center mb-4">
-                <input type="radio" name="envio" class="text-gray-600">
+                <input x-model="envio_type" type="radio" value="1" name="envio_type" class="text-gray-600">
                 <span class="ml-2 text-gray-700">
                     Recojo en tienda (Calle falsa 123)
                 </span>
@@ -22,15 +24,72 @@
                     Gratis
                 </span>
             </label>
-            <label class="bg-white rounded-lg shadow-lg px-6 py-4 flex items-center">
-                <input type="radio" name="envio" class="text-gray-600">
-                <span class="ml-2 text-gray-700">
-                    Envío a domicilio
-                </span>
-            </label>
+
+            <div class="bg-white rounded-lg shadow">
+                <label class= "px-6 py-4 flex items-center">
+                    <input x-model="envio_type" type="radio" value="2" name="envio_type" class="text-gray-600">
+                    <span class="ml-2 text-gray-700">
+                        Envío a domicilio
+                    </span>
+                </label>
+                <div class="px-6 pb-2 grid grid-cols-2 gap-6 hidenn" :class="{ 'hidden' : envio_type != 2 }">
+                    {{-- Deparatamentos --}}
+                    <div>
+                        <x-jet-label value="Departamento" />
+                            <select class="form-control w-full">
+
+                                <option value="" disabled selected wire:model="department_id">Seleccione un departamento</option>
+
+                                @foreach ($departments as $department)
+                                    <option value="{{ $department->id }}"> {{ $department->name }}</option>
+                                @endforeach
+                            </select>
+                            <x-jet-input-error for="department_id" />
+                    </div>
+
+                    {{-- Ciudades --}}
+                    <div>
+                        <x-jet-label value="Ciudad" />
+                            <select class="form-control w-full">
+
+                                <option value="" disabled selected wire:model="city_id">Seleccione una ciudad</option>
+
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}"> {{ $city->name }}</option>
+                                @endforeach
+                            </select>
+                            <x-jet-input-error for="city_id" />
+                    </div>
+                    {{-- Distritos --}}
+                    <div>
+                        <x-jet-label value="Distrito" />
+                            <select class="form-control w-full">
+
+                                <option value="" disabled selected wire:model="district_id">Seleccione un distrito</option>
+
+                                @foreach ($districts as $district)
+                                    <option value="{{ $district->id }}"> {{ $district->name }}</option>
+                                @endforeach
+                            </select>
+                            <x-jet-input-error for="district_id" />
+                    </div>
+
+                    <div>
+                        <x-jet-label value="Dirección" />
+                        <x-jet-input class="w-full" wire:model="address" type="text" />
+                        <x-jet-input-error for="address" />
+                    </div>
+
+                    <div class="col-span-2">
+                        <x-jet-label value="Referencia" />
+                        <x-jet-input class="w-full" wire:model="references" type="text" />
+                        <x-jet-input-error for="references" />
+                    </div>
+                </div>
+            </div>
         </div>
         <div>
-            <x-jet-button class="mt-6 mb-4">
+            <x-jet-button  class="mt-6 mb-4" wire:click="create_order" wire:loading.attr="disabled" wire:target="create_order">
                 Continuar con la compra
             </x-jet-button>
             <hr>
@@ -75,7 +134,7 @@
             <div class="text-gray-700 p-4">
                 <p class="flex justify-between items-center">
                     Subtotal
-                    <span class="font-semibold"> {{Cart::subtotal()}} USD</span>
+                    <span class="font-semibold"> {{ Cart::subtotal() }} USD</span>
                 </p>
                 <p class="flex justify-between items-center">
                     Envio
@@ -86,7 +145,7 @@
 
                 <p class="flex justify-between items-center font-semibold">
                     Total
-                    <span class="text-lg">{{Cart::subtotal()}}</span>
+                    <span class="text-lg">{{ Cart::subtotal() }}</span>
                 </p>
 
             </div>

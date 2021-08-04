@@ -19,7 +19,7 @@ class DepartmentSeeder extends Seeder
         Department::factory(8)->create()->each(function (Department $department){
             City::factory(8)->create([
 
-                'department'=>$department->id
+                'department_id'=>$department->id
 
             ])->each(function (City $city){
                 District::factory(8)->create([
