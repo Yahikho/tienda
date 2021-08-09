@@ -8,17 +8,33 @@
         
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
-        
+
+
+        $shipments = new MercadoPago\Shipments();
+
+        $shipments->cost = $order->shipping_cost;
+        $shipments->mode = "not_specified";
+
+        $preference->shipments = $shipments;
         // Crea un ítem en la preferencia
+        
         foreach ($items as $product) {
             $item = new MercadoPago\Item();
             $item->title = $product->name;
             $item->quantity = $product->qty;
             $item->unit_price = $product->price;
-
+        
             $products[] = $item;
         }
-        $preference->items = array($products);
+        
+        $preference->back_urls = [
+            'success' => route('orders.pay', $order),
+            // 'failure' => 'http://www.tu-sitio/failure',
+            // 'pending' => 'http://www.tu-sitio/pending',
+        ];
+
+        $preference->auto_return = 'approved';
+        $preference->items = $products;
         $preference->save();
         
     @endphp
@@ -113,14 +129,11 @@
                 <p class="text-lg font-semibold ">
                     Total: {{ $order->total }} USD
                 </p>
-                <div class="cho-container">
-
-                </div>
+                <div class="cho-container"></div>
             </div>
         </div>
     </div>
     <script src="https://sdk.mercadopago.com/js/v2"></script>
-
     <script>
         // Agrega credenciales de SDK
         const mp = new MercadoPago("{{ config('services.mercadopago.key') }}", {
@@ -138,5 +151,4 @@
             }
         });
     </script>
-
 </x-app-layout>
