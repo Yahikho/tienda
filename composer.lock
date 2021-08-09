@@ -3198,11 +3198,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-<<<<<<< HEAD
-                    "homepage": "https://www.php-fig.org/"
-=======
                     "homepage": "http://www.php-fig.org/"
->>>>>>> 3bc979a7ebaef253129e0603bd51c6df62892c83
                 }
             ],
             "description": "Common interface for caching libraries",
@@ -3212,15 +3208,9 @@
                 "psr-6"
             ],
             "support": {
-<<<<<<< HEAD
-                "source": "https://github.com/php-fig/cache/tree/3.0.0"
-            },
-            "time": "2021-02-03T23:26:27+00:00"
-=======
                 "source": "https://github.com/php-fig/cache/tree/master"
             },
             "time": "2016-08-06T20:24:11+00:00"
->>>>>>> 3bc979a7ebaef253129e0603bd51c6df62892c83
         },
         {
             "name": "psr/container",

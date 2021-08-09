@@ -1,5 +1,4 @@
-<x-app-layout>
-
+<div>
     @php
         // SDK de Mercado Pago
         require base_path('/vendor/autoload.php');
@@ -146,31 +145,27 @@
 
     </div>
 
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-
-    <script>
-        // Agrega credenciales de SDK
-        const mp = new MercadoPago("{{ config('services.mercadopago.key') }}", {
-            locale: 'es-AR'
-        });
-
-        // Inicializa el checkout
-        mp.checkout({
-            preference: {
-                id: '{{ $preference->id }}'
-            },
-            render: {
-                container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
-                label: 'Pagar', // Cambia el texto del botón de pago (opcional)
-            }
-        });
-    </script>
-
     @push('script')
 
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
 
+        <script>
+            // Agrega credenciales de SDK
+            const mp = new MercadoPago("{{ config('services.mercadopago.key') }}", {
+                locale: 'es-AR'
+            });
 
+            // Inicializa el checkout
+            mp.checkout({
+                preference: {
+                    id: '{{ $preference->id }}'
+                },
+                render: {
+                    container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
+                    label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+                }
+            });
+        </script>
         <script src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}">
             // Replace YOUR_CLIENT_ID with your sandbox client ID
         </script>
@@ -182,13 +177,14 @@
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: "2"
+                                value: "{{ $order->total }}"
                             }
                         }]
                     });
                 },
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
+                        
                         Livewire.emit('payOrder');
                         /* console.log(details);
                         alert('Transaction completed by ' + details.payer.name.given_name); */
@@ -198,5 +194,4 @@
         </script>
 
     @endpush
-
-</x-app-layout>
+</div>
