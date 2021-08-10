@@ -123,8 +123,8 @@
         </div>
 
         <div class="col-span-2">
-            <div class="bg-white rounded-lg shadow-lg px-6 pt-6">
-                <div class=" flex justify-between items-center mb-4">
+            <div class="bg-white rounded-lg shadow-lg">
+                <div class=" flex justify-between items-center">
                     <img class="h-8" src="{{ asset('img/MC_VI_DI_2-1.jpg') }}" alt="">
                     <div class="text-gray-700">
                         <p class="text-sm font-semibold ">
@@ -136,40 +136,36 @@
                         <p class="text-lg font-semibold ">
                             Total: {{ $order->total }} USD
                         </p>
-                        <div class="cho-container"></div>
                     </div>
-
                 </div>
+                <div class="cho-container"></div>
                 <div id="paypal-button-container"></div>
             </div>
         </div>
 
     </div>
 
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-
-    <script>
-        // Agrega credenciales de SDK
-        const mp = new MercadoPago("{{ config('services.mercadopago.key') }}", {
-            locale: 'es-AR'
-        });
-
-        // Inicializa el checkout
-        mp.checkout({
-            preference: {
-                id: '{{ $preference->id }}'
-            },
-            render: {
-                container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
-                label: 'Pagar', // Cambia el texto del botón de pago (opcional)
-            }
-        });
-    </script>
-
     @push('script')
 
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
 
+        <script>
+            // Agrega credenciales de SDK
+            const mp = new MercadoPago("{{ config('services.mercadopago.key') }}", {
+                locale: 'es-AR'
+            });
+
+            // Inicializa el checkout
+            mp.checkout({
+                preference: {
+                    id: '{{ $preference->id }}'
+                },
+                render: {
+                    container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
+                    label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+                }
+            });
+        </script>
 
         <script src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}">
             // Replace YOUR_CLIENT_ID with your sandbox client ID
@@ -182,7 +178,7 @@
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: "2"
+                                value: "{{ order->total }}"
                             }
                         }]
                     });

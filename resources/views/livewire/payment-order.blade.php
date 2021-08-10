@@ -135,11 +135,13 @@
                         <p class="text-lg font-semibold ">
                             Total: {{ $order->total }} USD
                         </p>
-                        <div class="cho-container"></div>
                     </div>
 
                 </div>
-                <div id="paypal-button-container"></div>
+                <div class="grid gap-6">
+                    <div class="cho-container"></div>
+                    <div id="paypal-button-container"></div>
+                </div>
             </div>
         </div>
 
@@ -184,7 +186,7 @@
                 },
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
-                        
+
                         Livewire.emit('payOrder');
                         /* console.log(details);
                         alert('Transaction completed by ' + details.payer.name.given_name); */
