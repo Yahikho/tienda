@@ -10,6 +10,7 @@ use App\Http\Livewire\ShoppingCart;
 use App\Http\Livewire\CreateOrder;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Livewire\PaymentOrder;
+use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,26 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('webhooks', WebhooksController::class);
 
+});
+
+Route::get('prueba', function () {
+
+    $hora = now()->subMinute(1);
+
+    $orders = Order::where('status', 1)->whereTime('created_at', '<=', $hora)->get();
+
+    foreach($orders as $order){
+
+        $items = json_decode($order->content); 
+        foreach ($items as $item){
+            increase($item);
+        }
+
+        $order->status = 5;
+
+        $order->save();
+        
+    }
 });
 
 
