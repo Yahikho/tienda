@@ -34,7 +34,7 @@
                 </p>
             </a>
 
-            <a href="{{ route('orders.index') . "?status=3" }}" class="bg-pink-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{ route('orders.index') . "?status=4" }}" class="bg-pink-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $entregado }}
                 </p>
@@ -44,7 +44,7 @@
                 </p>
             </a>
 
-            <a href="{{ route('orders.index') . "?status=4" }}" class="bg-green-500 bg-opacity rounded-lg px-12 pt-8 pb-4">
+            <a href="{{ route('orders.index') . "?status=5" }}" class="bg-green-500 bg-opacity rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $anulado }}
                 </p>

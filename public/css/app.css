@@ -1240,6 +1240,9 @@ select {
 .mb-3 {
 	margin-bottom: 0.75rem;
 }
+.-mt-10 {
+	margin-top: -2.5rem;
+}
 .mb-2 {
 	margin-bottom: 0.5rem;
 }
@@ -2224,9 +2227,9 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
-.hover\:text-orange-700:hover {
+.hover\:text-orange-600:hover {
 	--tw-text-opacity: 1;
-	color: rgba(194, 65, 12, var(--tw-text-opacity));
+	color: rgba(234, 88, 12, var(--tw-text-opacity));
 }
 .hover\:text-orange-400:hover {
 	--tw-text-opacity: 1;

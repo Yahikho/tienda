@@ -43,6 +43,7 @@ function qty_available($product_id, $color_id = null, $size_id = null){
 }
 
 function discount($item){
+
     $product = Product::find($item->id);
     $qty_available = qty_available($item->id, $item->options->color_id, $item->options->size_id);
 
@@ -64,7 +65,6 @@ function discount($item){
         $product->colors()->attach([
             $item->options->color_id => ['quantity' => $qty_available]
         ]);
-
 
     }else{
 
