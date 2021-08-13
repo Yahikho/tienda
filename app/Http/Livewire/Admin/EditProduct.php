@@ -94,6 +94,8 @@ class EditProduct extends Component
 
         $this->product->save();
 
+        $this->emit('saved');
+
     }
 
     public function render()
