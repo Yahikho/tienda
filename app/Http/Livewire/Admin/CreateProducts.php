@@ -76,7 +76,7 @@ class CreateProducts extends Component
         $product->price = $this->price;
         $product->subcategory_id = $this->subcategory_id;
         $product->brand_id = $this->brand_id;
-        
+
         if($this->subcategory_id){
             if(!$this->subcategory->color && !$this->subcategory->size){
                 $product->quantity = $this->quantity;
@@ -84,6 +84,8 @@ class CreateProducts extends Component
         }
 
         $product->save();
+
+        return redirect()->route('admin.products.edit', $product);
 
     }
 
