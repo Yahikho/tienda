@@ -1264,6 +1264,12 @@ select {
 .mb-2 {
 	margin-bottom: 0.5rem;
 }
+.mt-12 {
+	margin-top: 3rem;
+}
+.mb-8 {
+	margin-bottom: 2rem;
+}
 .mt-0\.5 {
 	margin-top: 0.125rem;
 }
@@ -1276,14 +1282,8 @@ select {
 .mt-auto {
 	margin-top: auto;
 }
-.mb-8 {
-	margin-bottom: 2rem;
-}
 .-mt-px {
 	margin-top: -1px;
-}
-.mt-12 {
-	margin-top: 3rem;
 }
 .block {
 	display: block;
@@ -1420,14 +1420,14 @@ select {
 .max-w-xl {
 	max-width: 36rem;
 }
+.max-w-4xl {
+	max-width: 56rem;
+}
 .max-w-5xl {
 	max-width: 64rem;
 }
 .max-w-6xl {
 	max-width: 72rem;
-}
-.max-w-4xl {
-	max-width: 56rem;
 }
 .flex-1 {
 	flex: 1 1 0%;
