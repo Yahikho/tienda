@@ -118,7 +118,6 @@
     </x-jet-dialog-modal>
 
     @push('script')
-
         <script>
             livewire.on('deletePivot', pivot => {
                 Swal.fire({
