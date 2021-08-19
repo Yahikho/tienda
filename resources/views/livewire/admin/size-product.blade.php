@@ -30,6 +30,9 @@
                         </x-jet-danger-button>
                     </div>
                 </div>
+
+                @livewire('admin.color-size', ['size' => $size], key('color-size'.$size->id))
+
             </li>
         @endforeach
     </ul>
@@ -74,7 +77,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
 
-                        livewire.emit('delete', sizeId)
+                        livewire.emitTo('admin.size-product','delete', sizeId)
 
                         Swal.fire(
                             'Deleted!',

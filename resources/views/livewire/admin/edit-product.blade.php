@@ -9,7 +9,7 @@
             {{-- CATEGORIA --}}
             <div>
                 <x-jet-label value="Categorías" />
-                <select class="w-full form-control" wire:model="category_id">
+                <select class="w-full form-control" wire:model="product.category_id">
 
                     <option value="" selected disabled>Selelciona un categoría</option>
 
