@@ -72,6 +72,7 @@ class ColorProduct extends Component
     public function delete(Pivot $pivot){
 
         $pivot->delete();
+        
         $this->product = $this->product->fresh();
 
     }
