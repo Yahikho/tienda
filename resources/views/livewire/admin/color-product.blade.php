@@ -119,6 +119,7 @@
 
     @push('script')
         <script>
+            
             livewire.on('deletePivot', pivot => {
                 Swal.fire({
                     title: 'Are you sure?',
@@ -141,6 +142,7 @@
                     }
                 })
             })
+            
         </script>
 
     @endpush

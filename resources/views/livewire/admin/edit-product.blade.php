@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-gray-700">
 
     <h1 class="text-3xl text-center font-semibold mb-8">
-        Complete esta información para crear un producto
+        Complete esta información para actualizar un producto
     </h1>
 
     <div class="mb-4" wire:ignore>

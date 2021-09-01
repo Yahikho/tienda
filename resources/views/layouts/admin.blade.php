@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.7/glider.min.css"
         integrity="sha512-YM6sLXVMZqkCspZoZeIPGXrhD9wxlxEF7MzniuvegURqrTGV2xTfqq1v9FJnczH+5OGFl5V78RgHZGaK34ylVg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+
     <link rel="stylesheet" href=" {{ asset('vendor/FlexSlider/flexslider.css') }}">
 
     {{-- Dropzone --}}
@@ -49,7 +49,7 @@
 
     <div class="min-h-screen bg-gray-100">
         @livewire('navigation-menu')
-        
+
         @if (isset($header))
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -71,6 +71,16 @@
     @livewireScripts
 
     @stack('script')
+
+    <script>
+        livewire.on('errorSize', mensaje => {
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: mensaje,
+        })
+        })
+    </script>
 </body>
 
 </html>
