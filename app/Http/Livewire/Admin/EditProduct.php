@@ -10,7 +10,9 @@ use App\Models\Subcategory;
 use App\Models\Brand;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use App\Models\Image;
 
+use Illuminate\Support\Facades\Storage;
 
 class EditProduct extends Component
 {
@@ -29,6 +31,8 @@ class EditProduct extends Component
         'product.price' => 'required',
         'product.quantity' => 'numeric'
     ];
+
+    protected $listeners = ['refreshProduct'];
     
 
     public function mount(Product $product){
@@ -46,6 +50,12 @@ class EditProduct extends Component
         $this->brands = Brand::whereHas('categories', function (Builder $query){
             $query->where('category_id', $this->category_id);
         })->get();
+
+    }
+
+    public function refreshProduct(){
+
+        $this->product = $this->product->refresh();
 
     }
 
@@ -95,6 +105,15 @@ class EditProduct extends Component
         $this->product->save();
 
         $this->emit('saved');
+
+    }
+
+    public function deleteImage(Image $image){
+
+        Storage::delete([$image->url]);
+        $image->delete();
+
+        $this->product = $this->product->fresh();
 
     }
 
