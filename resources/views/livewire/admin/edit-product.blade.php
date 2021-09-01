@@ -4,19 +4,24 @@
         Complete esta información para crear un producto
     </h1>
 
+    <div class="mb-4" wire:ignore>
+        <form action="{{ route('admin.products.files', $product) }}" method="POST" class="dropzone"
+            id="my-awesome-dropzone"></form>
+    </div>
+
     <div class="bg-white shadow-xl rounded-lg p-6">
         <div class="grid grid-cols-2 gap-6 mb-4">
             {{-- CATEGORIA --}}
             <div>
                 <x-jet-label value="Categorías" />
-                <select class="w-full form-control" wire:model="product.category_id">
-
-                    <option value="" selected disabled>Selelciona un categoría</option>
+                <select class="w-full form-control" wire:model="category_id">
+                    <option value="" selected disabled>Seleccione una categoría</option>
 
                     @foreach ($categories as $category)
-                        <option value=" {{ $category->id }} "> {{ $category->name }}</option>
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
+
                 <x-jet-input-error for="category_id" />
             </div>
             {{-- Sub-categoria --}}
@@ -115,11 +120,11 @@
     </div>
 
     @if ($this->subcategory)
-    
+
         @if ($this->subcategory->size)
 
             @livewire('admin.size-product', ['product' => $product], key('size-product' . $product->id))
-        
+
         @elseif($this->subcategory->color)
 
             @livewire('admin.color-product', ['product' => $product], key('color-product' . $product->id))
@@ -128,4 +133,18 @@
 
     @endif
 
+    @push('script')
+        <script>
+            // "myAwesomeDropzone" is the camelized version of the HTML element's ID
+            Dropzone.options.myAwesomeDropzone = {
+                headers: {
+                    'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+                },
+                dictDefaultMessage : "Arrastre una imagen al recuadro",
+                acceptedFiles : "image/*",
+                paramName: "file", // The name that will be used to transfer the file
+                maxFilesize: 2, // MB
+            };
+        </script>
+    @endpush
 </div>
